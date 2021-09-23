@@ -1,0 +1,11 @@
+.form_fields {
+    display: block;
+    border: 0;
+    border-bottom: 1px solid #CCC;
+    margin-top: 2rem;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+    outline: none;
+}
