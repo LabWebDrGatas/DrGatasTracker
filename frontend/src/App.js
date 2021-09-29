@@ -11,14 +11,14 @@ import Track_Item from './pages/track_item'
 import Track from './pages/track'
 import Login from './pages/login'
 import Solicitud from "./pages/solicitud";
-
+import pedidosMock from './state/mockData';
 
 import {main, mainStateReducer} from './state/mainState'
 
 function App() {
 
   let [mainState, stateDispatch] = useReducer(mainStateReducer, {
-    pedidos: [],
+    pedidos: pedidosMock,
     pedido: {},
     admin: 0,
     test: ''

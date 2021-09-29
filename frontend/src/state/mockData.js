@@ -1,8 +1,8 @@
-const pedidos = {
-    num_pedido: 'yes',
-    nombres: 'yes',
-    apellido: 'yes',
-    email: 'yes',
+const pedidos = [{
+    num_pedido: '12345',
+    nombres: 'Alejandro',
+    apellido: ' Rdz',
+    email: 'prueba@mail.com',
     buzon: 'yes',
     estatus_paso: {
         type: 2,
@@ -12,9 +12,9 @@ const pedidos = {
         type: 'yes',
         estatus_paso: 'Depositado'
     },
-    marca: 'yes',
-    modelo: 'yes',
-    talla: 'yes',
+    marca: 'Scarpa Instrict',
+    modelo: 'modelo',
+    talla: '43',
     comentario_cliente: 'String',
     comentario_resolador: 'String',
     material_suela: 'String',
@@ -36,4 +36,6 @@ const pedidos = {
             default: false
         }
     }
-}
+}]
+
+export default pedidos;
