@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  h1 {
+    @apply text-5xl justify-self-center
+  }
   h3 {
     @apply text-3xl
   } 
