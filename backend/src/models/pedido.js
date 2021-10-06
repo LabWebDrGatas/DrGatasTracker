@@ -17,6 +17,10 @@ const pedidoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    buzon: {
+        type: String,
+        required: true,
+    },
     estado: {
         type: String,
         required: true
@@ -31,7 +35,7 @@ const pedidoSchema = new mongoose.Schema({
     },
     comentarioCliente: {
         type: String,
-        maxlenght: 500
+        maxLength: 500
     },
     comentarioResolador: {
         type: String,
@@ -48,11 +52,11 @@ const pedidoSchema = new mongoose.Schema({
     historialEstados: [
         {
             fecha: {
-                type: String,
+                type: Date,
                 required: true
             },
             estado: {
-                type: String,
+                type: Number,
                 required: true
             }
         }
