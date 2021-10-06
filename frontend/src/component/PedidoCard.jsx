@@ -1,27 +1,28 @@
 import React from "react";
-
+import { estados } from "./../state/estados";
 
 export default function PedidoCard(props) {
-
   // const { image, servicio } = props.pedido
-  var pedido = props.pedido
+
+  var pedido = props.pedido;
   const foto =
     props.pedido.img ||
     "https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80";
-  const servicio = 'Resolado + ' + pedido.servicio || 'Resolado'
-  const zapatos = pedido.marca + ' ' + pedido.modelo || 'Scarpa Drago';
-  const buzon = pedido.buzon || 'Sierra Elevation';
-  const ultimoMovimiento = pedido.ultimomovimiento || '05-03-2021';
-  const textoBotonSiguiente = pedido.textButtonNext || 'Aceptar';
-  const textoBotonRegresar = pedido.textButtonNext || 'Rechazar';
+  const servicio =  pedido.servicioExtra ? "Resolado + " + pedido.servicioExtra : "Resolado";
+  const zapatos = pedido.numRastreo + ' | ' + pedido.marca + " " + pedido.modelo;
+  const buzon = pedido.buzon || "Sierra Elevation";
+  const estado = estados[pedido.estado];
+  const ultimoMovimiento = pedido.historialEstados[0].fecha || "05-03-2021";
+  const textoBotonSiguiente = props.textButtonNext || "Aceptar";
+  const textoBotonRegresar = props.textButtonNext || "Rechazar";
 
   function handleBackButton() {
-    pedido.estado -= 1
-    console.log(pedido.estado)
+    pedido.estado -= 1;
+    console.log(pedido.estado);
     // pedido.save()
   }
   function handleNextButton() {
-    pedido.estado += 1
+    pedido.estado += 1;
     // pedido.save()
   }
   return (
@@ -87,7 +88,10 @@ export default function PedidoCard(props) {
                     d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
                   ></path>
                 </svg>
-                <p class=''>{ultimoMovimiento}</p>
+                <div class=''>
+                  <p>{estado}</p>
+                  <p class=''>{ultimoMovimiento}</p>
+                </div>
               </div>
             </div>
             <div class='flex p-4 pb-2 border-t border-gray-200 '></div>

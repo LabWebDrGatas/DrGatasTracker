@@ -11,7 +11,7 @@ const Admin = () => {
 
         <div class='container'>
           <h3>Nuevos Pedidos</h3>
-          <PedidoCard pedido={pedidos.at(1)}/>
+          <PedidoCard pedido={pedidos.at(0)}/>
         </div>
         <div class='container'>
           <h3>En Proceso</h3>
