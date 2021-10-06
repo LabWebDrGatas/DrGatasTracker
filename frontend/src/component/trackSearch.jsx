@@ -17,16 +17,21 @@ const TrackSearch = () => {
         setTrackingNumber(e.target.value);
     }
 
-    const handleSearch = () => {
-        let pedido;
+    const fetchFindOrder = () => {
+        
+    }
+
+    const handleSearch = async () => {
         // Search order
         //let pedido = context.dispatch({type: "FIND_PEDIDO", payload: {id: "yes", lastname: "yes"}})
-        if (lastname && trackingNumber) {
-            pedido = mockData[0];
-        }
-        
-        if (pedido) {
-            history.push('/Track/' + pedido.num_pedido);
+        if (lastname && trackingNumber){
+            let url = "https://run.mocky.io/v3/9cec9a2f-d398-4b53-a041-43da3fcd9527";
+            fetch(url).then(res => res.json()).then((data) => {
+                let order = data;    
+                if (order) {
+                    history.push('/Track/' + order.num_pedido);
+                }
+            })
         }
     }
 
