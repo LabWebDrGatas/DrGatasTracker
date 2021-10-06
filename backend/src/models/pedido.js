@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
 
-const pedidoSchema = new.mongoose.Schema({
+
+const pedidoSchema = new mongoose.Schema({
+    numRastreo: {
+        type: String,
+        required: true,
+        length: 5,
+        unique: true
+    },
     cliente: {
         type: String,
         required: true

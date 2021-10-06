@@ -1,0 +1,16 @@
+[{
+    "cliente": "Luis",
+    "email": "l@l.com",
+    "estado": "Depositado",
+    "marca": "Nike",
+    "comentarioCliente": "",
+    "comentarioResolador": "",
+    "materialSuela": "Goma",
+    "fechaPedido": "2021-10-01",
+    "historialEstados": [],
+    "servicioExtra": "No"
+},
+{
+    "email": "drgatasadmin@drgatas.com",
+    "password": "12345678"
+}]
