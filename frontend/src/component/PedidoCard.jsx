@@ -13,8 +13,8 @@ export default function PedidoCard(props) {
   const buzon = pedido.buzon || "Sierra Elevation";
   const estado = estados[pedido.estado];
   const ultimoMovimiento = pedido.historialEstados[0].fecha || "05-03-2021";
-  const textoBotonSiguiente = props.textButtonNext || "Aceptar";
-  const textoBotonRegresar = props.textButtonNext || "Rechazar";
+  const textoBotonSiguiente = props.nextButtonText || "Aceptar";
+  const textoBotonRegresar = props.backButtonText || "Rechazar";
 
   function handleBackButton() {
     pedido.estado -= 1;
@@ -98,14 +98,14 @@ export default function PedidoCard(props) {
             <div class='row-span-2 col-span-2 flex space-x-3 text-sm font-medium'>
               <div class='flex-auto flex space-x-3'>
                 <button
-                  class='mb-2 md:mb-0 bg-red-600 px-4 py-2 shadow-sm tracking-wider border text-gray-100 rounded-full hover:bg-red-500 inline-flex items-center space-x-2 '
+                  class='mb-2 md:mb-0 bg-red-600 px-4 py-2 shadow-sm tracking-wider border text-white rounded-full hover:bg-red-500 inline-flex items-center space-x-2 '
                   onClick={handleBackButton}
                 >
                   <span>{textoBotonRegresar}</span>
                 </button>
               </div>
               <button
-                class='mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-800'
+                class='mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800'
                 onClick={handleNextButton}
               >
                 {textoBotonSiguiente}
