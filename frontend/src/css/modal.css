@@ -1,0 +1,8 @@
+.myModal h2{
+    font-size: 24px;
+}
+.myModal .body{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}

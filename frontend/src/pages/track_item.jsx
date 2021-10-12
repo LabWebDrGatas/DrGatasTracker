@@ -18,15 +18,15 @@ const Track_Item = props => {
                 <TrackSearch />
             </div>
             <div className="right">
-                <Stepper status={pedido.estatus_paso.type}/>
+                <Stepper status={pedido.estado}/>
                 <div className="row-table">
                     <span># de envio</span>
-                    <span style={{float: 'right'}}>{pedido.num_pedido}</span>
+                    <span style={{float: 'right'}}>{pedido.numRastreo}</span>
                 </div>
                 <hr/>
                 <div className="row-table">
                     <span>Cliente</span>
-                    <span style={{float: 'right'}}>{pedido.nombres} {pedido.apellido}</span>
+                    <span style={{float: 'right'}}>{pedido.cliente}</span>
                 </div>
                 <hr/>
                 <div className="row-table">
@@ -35,11 +35,15 @@ const Track_Item = props => {
                 </div>
                 <hr/>
                 <div className="row-table">
-                    <span>Talla</span>
-                    <span style={{float: 'right'}}>{pedido.talla}</span>
+                    <span>Modelo</span>
+                    <span style={{float: 'right'}}>{pedido.modelo}</span>
                 </div>
                 <hr/>
-                
+                <div className="row-table">
+                    <span>Material de la suela</span>
+                    <span style={{float: 'right'}}>{pedido.materialSuela}</span>
+                </div>
+                <hr/>
             </div>
         </div>
     );
