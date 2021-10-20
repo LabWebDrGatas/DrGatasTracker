@@ -1,17 +1,18 @@
 import React, {useReducer} from 'react';
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import "./css/tailwind.css";
 
 import Navbar from './component/navbar'
-import Footer from "./component/footer";
+import Footer from './component/footer';
 import Homepage from './pages/homepage'
 import Admin from './pages/admin'
 import Track_Item from './pages/track_item'
 import Track from './pages/track'
 import Login from './pages/login'
-import Solicitud from "./pages/solicitud";
+import Solicitud from './pages/solicitud';
 import pedidosMock from './state/mockData';
+import Table from './pages/table';
 
 import {main, mainStateReducer} from './state/mainState'
 
@@ -31,6 +32,8 @@ function App() {
         <Switch>
           <Route path='/Home' component={Homepage} />
           <Route path='/Admin' component={Admin} />
+          <Route path='/Admin/Table' component={Table} />
+          <Route path='/Table' component={Table} />
           <Route path='/Request' component={Solicitud} />
           <Route path='/Track/:_id' component={Track_Item} />
           <Route path='/Track' component={Track} />

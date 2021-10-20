@@ -1,13 +1,23 @@
 import React, { Component } from "react";
+import { useHistory } from "react-router";
+
 import PedidoCard from "../component/PedidoCard";
 import pedidos from './../state/mockData';
 
 const Admin = () => {
   // const pedidos = await 
+
+  const history = useHistory();
+
+  const changeToTablePage = (e) => {
+    history.push('/Table');
+  }
+
   return (
     <>
       <div class='container'>
         <h1>Administración de pedidos</h1>
+        <button className='table_button_blue' onClick={() => changeToTablePage()}> Go to orders Table </button>
 
         <div class='container'>
           <h3>Nuevos Pedidos</h3>
