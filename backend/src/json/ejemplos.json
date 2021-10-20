@@ -1,7 +1,7 @@
 [{
     "cliente": "Luis",
     "email": "l@l.com",
-    "estado": "Depositado",
+    "estado": 1,
     "marca": "Nike",
     "comentarioCliente": "",
     "comentarioResolador": "",

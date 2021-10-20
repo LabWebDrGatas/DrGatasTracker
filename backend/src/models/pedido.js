@@ -22,7 +22,7 @@ const pedidoSchema = new mongoose.Schema({
         required: true,
     },
     estado: {
-        type: String,
+        type: Number,
         required: true
     },
     marca: {

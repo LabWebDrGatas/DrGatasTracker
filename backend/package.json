@@ -4,7 +4,8 @@
   "description": "back dr gatas",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
   },
   "author": "",
   "license": "MIT",
@@ -18,5 +19,8 @@
     "mongoose": "^6.0.8",
     "validator": "^13.6.0",
     "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }

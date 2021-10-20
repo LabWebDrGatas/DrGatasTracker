@@ -6,4 +6,5 @@ else{
   var connectionURL = require('../config.js').connectionURL
 }
 
-mongoose.connect( connectionURL, {}, () => {console.log('Connected to db');});
+const connection = mongoose.connect( connectionURL, {}, () => {console.log('Connected to db');});
+
