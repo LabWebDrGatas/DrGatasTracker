@@ -11,7 +11,7 @@ const createAdmin = function(req, res) {
 }
 
 const getAdmin = function(req, res) {
-    Admin.findOne({email: req.params.email}).then(function(admin) {
+    Admin.findOne({email: req.body.email}, '-password').then(function(admin) {
         if(!admin){
             return res.status(404).send({error: 'Admin not found'});
         }
