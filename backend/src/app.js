@@ -26,7 +26,9 @@ app.use((error, req, res, next) => {
         return next(error);
     }
     res.status(error.code || 500);
-    res.json({message: error.message || 'Unknown server error!'});
+    res.json({message: error.message || 'Unknown server error!',
+                error: error.err || ""
+    });
 })
 
 

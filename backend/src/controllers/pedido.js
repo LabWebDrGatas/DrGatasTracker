@@ -23,11 +23,23 @@ const getPedidos = async (req, res, next) => {
 //crear un pedido en la base de datos
 const createPedido = async (req, res, next) => {
     const pedido = new Pedido(req.body);
+    let pedidoExiste;
+    try{
+        pedidoExiste = await Pedido.findOne({numRastreo: pedido.numRastreo})
+    } catch (err) {
+        const error = new httpError('Error al verificar si el pedido existe', 400);
+        return next(error);
+    }
+
+    if(pedidoExiste){
+        const error = new httpError('El pedido con ese numero de orden ya existe!', 400);
+        return next(error);
+    }
+
     try {
         await pedido.save();
     }catch (err){
-        console.log(err);
-        const error = new httpError('Order could not be created !', 400);
+        const error = new httpError('Order could not be created !', 422);
         return next(error);
     }
     res.json(pedido);

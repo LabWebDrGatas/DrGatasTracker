@@ -15,6 +15,8 @@ router.delete('/deletePedido/:pedido', pedidos.deletePedido);
 //admin
 router.get('/getAdmin', admin.getAdmin);
 router.post('/createAdmin', admin.createAdmin);
+router.delete('/deleteAdmin', admin.deleteAdmin);
+router.post('/loginAdmin', admin.loginAdmin);
 
 //general
 router.get('*', (req, res) => {
