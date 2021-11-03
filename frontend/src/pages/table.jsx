@@ -11,11 +11,7 @@ const Table = () => {
   // const pedidos = await 
 
   const history = useHistory();
-  const [items, setItems] = useState();
-
-  useEffect(() => {
-    setItems(mockData)
-    }, [])
+  const [items, setItems] = useState(mockData);
 
   const changeToAdminPage = (e) => {
     history.push('/Admin/');

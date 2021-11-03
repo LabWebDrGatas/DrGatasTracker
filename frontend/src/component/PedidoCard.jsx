@@ -1,29 +1,32 @@
 import React from "react";
 import { estados } from "./../state/estados";
 
-export default function PedidoCard(props) {
-  // const { image, servicio } = props.pedido
+export default function PedidoCard({
+  order,
+  updateOneOrder,
+}) {
 
-  var pedido = props.pedido;
   const foto =
-    props.pedido.img ||
+    order.img ||
     "https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80";
-  const servicio =  pedido.servicioExtra ? "Resolado + " + pedido.servicioExtra : "Resolado";
-  const zapatos = pedido.numRastreo + ' | ' + pedido.marca + " " + pedido.modelo;
-  const buzon = pedido.buzon || "Sierra Elevation";
-  const estado = estados[pedido.estado];
-  const ultimoMovimiento = pedido.historialEstados[0].fecha || "05-03-2021";
-  const textoBotonSiguiente = props.nextButtonText || "Aceptar";
-  const textoBotonRegresar = props.backButtonText || "Rechazar";
+  const servicio = order.servicioExtra
+    ? "Resolado + " + order.servicioExtra
+    : "Resolado";
+  const zapatos = order.numRastreo + " | " + order.marca + " " + order.modelo;
+  const buzon = order.buzon || "Sierra Elevation";
+  const estado = estados[order.estado];
+  const ultimoMovimiento = order.historialEstados[0].fecha || "05-03-2021";
+  const textoBotonSiguiente = (order.estado==0 && "Aceptar") || "Avanzar";
+  const textoBotonRegresar = (order.estado==0 && "Rechazar") || "Retroceder";
 
+  
   function handleBackButton() {
-    pedido.estado -= 1;
-    console.log(pedido.estado);
-    // pedido.save()
+    order.estado -= 1;
+    updateOneOrder(order);
   }
   function handleNextButton() {
-    pedido.estado += 1;
-    // pedido.save()
+    order.estado += 1;
+    updateOneOrder(order);
   }
   return (
     <>
@@ -98,14 +101,14 @@ export default function PedidoCard(props) {
             <div class='row-span-2 col-span-2 flex space-x-3 text-sm font-medium'>
               <div class='flex-auto flex space-x-3'>
                 <button
-                  class='mb-2 md:mb-0 bg-red-600 px-4 py-2 shadow-sm tracking-wider border text-white rounded-full hover:bg-red-500 inline-flex items-center space-x-2 '
+                  class='mb-2 md:mb-0 bg-red-600 px-4 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-500 inline-flex items-center space-x-2 '
                   onClick={handleBackButton}
                 >
                   <span>{textoBotonRegresar}</span>
                 </button>
               </div>
               <button
-                class='mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800'
+                class='mb-2 md:mb-0 bg-green-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-500'
                 onClick={handleNextButton}
               >
                 {textoBotonSiguiente}
