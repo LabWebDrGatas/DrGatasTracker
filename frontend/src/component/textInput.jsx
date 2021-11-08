@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TextInput(props) {
-  const { placeholder, clas, style } = props;
+  const { id, type, placeholder, clas, style } = props;
 
   const styles = {
     default:
@@ -19,8 +19,8 @@ export default function TextInput(props) {
   return (
     <>
       <input
-        id='default'
-        type='text'
+        id={id}
+        type='type'
         name='default'
         placeholder={placeholder}
         class={clas + ' ' + styleSelected}

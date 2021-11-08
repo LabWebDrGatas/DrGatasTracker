@@ -6,6 +6,7 @@ import Modal from '../component/modal';
 
 import '../css/homepage.css'
 import '../css/form.css'
+import Button from './../component/button';
 
 const Homepage = props => {
     const history = useHistory();
@@ -51,7 +52,10 @@ const Homepage = props => {
                         <form id='myform' onSubmit={submitForm}>
                             <input className='form_fields' type='text' placeholder='Nombre' onChange={handleLastName}/>
                             <input className='form_fields' type='text' placeholder='Numero' onChange={handleTrackingNumber}/>
-                            <button className={'button-home'}type="submit" value="Submit">Buscar</button>
+                            <Button
+                                type='submit'
+                                text='Buscar'
+                            />
                         </form>
                         <Modal
                         isVisible={modalVisible}

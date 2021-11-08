@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import mockData from'../state/mockData';
 import '../css/track.css';
 import Modal from './modal';
+import Button from './button';
 
 
 const TrackSearch = () => {
@@ -46,7 +47,10 @@ const TrackSearch = () => {
             <div className="form">
                 <input placeholder="Apellido" type="text" name="lastname" onChange={handleLastName}/>
                 <input placeholder="# de seguimiento" type="text" name="lastname" onChange={handleTrackingNumber}/>
-                <button onClick={handleSearch}>Buscar</button>
+                <Button
+                    onClick={handleSearch}
+                    text='Buscar'
+                />
             </div>
             <Modal
                 isVisible={modalVisible}

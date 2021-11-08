@@ -1,5 +1,6 @@
 import React from "react";
 import TextInput from "../component/textInput";
+import Button from './../component/button';
 
 export default function Solicitud() {
   return (
@@ -86,12 +87,11 @@ export default function Solicitud() {
             </label>
           </div>
           <div class='mb-2 '>
-            <button
-              id='nuevo-pedido'
-              class='place-self-right px-5 py-3 rounded-xl text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-800 active:bg-grey-900 focus:outline-none border-4 border-white focus:border-purple-200 transition-all'
-            >
-              Agregar
-            </button>
+            <Button
+              id='submit-button'
+              type='submit'
+              text='Agregar'
+            />
           </div>
         </form>
       </div>
