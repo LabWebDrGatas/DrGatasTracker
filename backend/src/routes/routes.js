@@ -5,21 +5,13 @@ const pedidos = require('../controllers/pedido');
 const admin = require('../controllers/admin');
 const checkAuth = require('../middleware/check-auth');
 
-
-
-
 /*************** NO AUTH REQUIRED  *****************/
 //pedidos
-router.get('/allpedidos', pedidos.getPedidos);
 router.get('/getPedidoRastreo/:pedido', pedidos.getPedidoRastreo);
 router.post('/createPedido', pedidos.createPedido);
 
 //admin
 router.post('/loginAdmin', admin.loginAdmin);
-
-
-
-
 
 /*************** AUTH REQUIRED  *****************/
 
@@ -33,6 +25,7 @@ router.delete('/deleteAdmin', admin.deleteAdmin);
 //pedido
 router.put('/updatePedido/:pedido', pedidos.updatePedido);
 router.delete('/deletePedido/:pedido', pedidos.deletePedido);
+router.get('/allpedidos', pedidos.getPedidos);
 
 //general
 router.get('*', (req, res) => {
