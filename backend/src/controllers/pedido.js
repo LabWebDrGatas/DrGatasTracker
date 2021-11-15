@@ -47,7 +47,6 @@ const createPedido = async (req, res, next) => {
 
 const getPedidoRastreo = async (req, res, next) => {
     const numRastreo = req.params.pedido;
-    console.log(numRastreo);
     let pedido;
     try {
         pedido = await Pedido.findOne({numRastreo: numRastreo});
@@ -77,7 +76,7 @@ const updatePedido = function(req,res) {
         if(!pedido){
             return res.status(404).send({ error: `Pedido con numero de rastreo ${numRastreo} no existe`});
         }
-        return res.send({actualizado: "Correcto"});
+        return res.send({actualizado: "Correcto", pedido});
     }).catch(function(error){
         res.status(500).send({Error: error});
     });
