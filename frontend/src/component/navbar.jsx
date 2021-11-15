@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import "../css/navbar.css";
@@ -7,20 +7,27 @@ import { main } from "../state/mainState";
 
 const Navbar = () => {
   let { state: globalState, dispatch } = useContext(main);
-
+  let context = useContext(main);
   const history = useHistory();
+  const [ isLogin, setIsLogin ] = useState();
+
+  useEffect(() => {
+
+  }, [])
 
   let handleNavigation = (url) => {
     history.push(url);
   };
 
   let handleLogOut = () => {
+    setIsLogin(false)
+    localStorage.clear();
     dispatch({ type: "SET_USER", payload: { admin: 0 } });
     history.push("/Homepage");
   };
 
   let renderLogInButton = () => {
-    if (globalState.admin == 0) {
+    if (!localStorage.getItem('token')) {
       return (
         <a onClick={() => handleNavigation("/Login/")} target='_blank'>
           Iniciar Sesión
@@ -30,7 +37,7 @@ const Navbar = () => {
   };
 
   let renderLogOutButton = () => {
-    if (globalState.name == 1) {
+    if (localStorage.getItem('token')) {
       return (
         <a onClick={() => handleLogOut()} target='_blank'>
           Cerrar Sesión
@@ -40,7 +47,7 @@ const Navbar = () => {
   };
 
   let renderAdminButton = () => {
-    if (globalState.admin == 1) {
+    if (localStorage.getItem('token')) {
       return (
         <a onClick={() => handleNavigation("/Admin/")} target='_blank'>
           Admin
@@ -48,7 +55,7 @@ const Navbar = () => {
       );
     }
   };
-
+  
   return (
     <React.Fragment>
       <div class='nav'>

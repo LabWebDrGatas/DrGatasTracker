@@ -23,6 +23,9 @@ const mainStateReducer = (state, action) => {
             return { ...state, pedido: pedidoRes };
         case 'LOG_OUT':
             return {...state, test: action.payload.admin}
+        case 'LOGIN':
+            localStorage.setItem('token', action.payload.token)
+            return {...state, admin: action.payload.token}
         default: 
             return state
     }

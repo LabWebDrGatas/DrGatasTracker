@@ -31,7 +31,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path='/Home' component={Homepage} />
-          <Route path='/Admin' component={Admin} />
+          { localStorage.getItem('token') ? <Route path='/Admin' component={Admin} /> : null }
           <Route path='/Admin/Table' component={Table} />
           <Route path='/Table' component={Table} />
           <Route path='/Request' component={Solicitud} />
