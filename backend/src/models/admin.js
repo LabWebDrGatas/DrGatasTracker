@@ -17,11 +17,6 @@ const adminSchema = new mongoose.Schema({
         required: true,
         minlength: 8,
         trim: true,
-        validate(value){
-          if(!validation.isLength(value, 8, 50)) {
-            throw new Error('Contraseña menor a ocho caracteres')
-          }
-        }
     }
 });
 
