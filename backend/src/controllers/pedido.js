@@ -2,6 +2,7 @@
 
 const Pedido = require('../models/pedido');
 const httpError = require('../models/errorModel');
+const EmailService = require('../service/emailService');
 
 //obtener todos los pedidos, posterior auth para solo el admin logueado
 const getPedidos = async (req, res, next) => {
@@ -22,7 +23,8 @@ const getPedidos = async (req, res, next) => {
 
 //crear un pedido en la base de datos
 const createPedido = async (req, res, next) => {
-    const pedido = new Pedido(req.body);
+    let pedido = new Pedido(req.body);
+    pedido.numRastreo = makeid(5);
     let pedidoExiste;
     try{
         pedidoExiste = await Pedido.findOne({numRastreo: pedido.numRastreo})
@@ -42,6 +44,7 @@ const createPedido = async (req, res, next) => {
         const error = new httpError('Order could not be created !', 422);
         return next(error);
     }
+    EmailService.sendEmail(pedido.numRastreo, 'Tu orden se generó y está pendiente de aprobación', pedido.email);
     res.json(pedido);
 }
 
@@ -99,6 +102,18 @@ const deletePedido = async (req, res, next) => {
     res.send({eliminado: "Correctamente",
     pedido
     });
+}
+
+//generate Order track id
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
 }
 
 
