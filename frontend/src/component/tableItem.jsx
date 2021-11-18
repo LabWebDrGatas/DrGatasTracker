@@ -5,12 +5,14 @@ import "../css/table.css";
 
 const TableItem = ({ numero_de_rastreo, cliente, correo, buzon, estado, marca, modelo, material_de_suela, servicio_extra }) => {
   let history = useHistory();
-  let handlePushHistory = () => {
+  let actualizarPedido = () => {
     console.log('this is the edit button')
+    console.log('/Update/' + numero_de_rastreo)
+    history.push('/Update/' + numero_de_rastreo);
   };
 
-  let logOut = () => {
-    console.log('this is the edit button')
+  let borrarPedido = () => {
+    console.log('this is the delete button')
   };
 
   return (
@@ -25,12 +27,12 @@ const TableItem = ({ numero_de_rastreo, cliente, correo, buzon, estado, marca, m
       <td>{material_de_suela}</td>
       <td>{servicio_extra}</td>        
       <td>
-        <button className='table_button_yellow' onClick={() => handlePushHistory()}>
+        <button className='table_button_yellow' onClick={() => actualizarPedido()}>
           Editar
         </button>
       </td>
       <td>
-        <button className='table_button_red' onClick={() => logOut()}> Borrar </button>
+        <button className='table_button_red' onClick={() => borrarPedido()}> Borrar </button>
       </td>
     </tr>
   );
