@@ -17,7 +17,7 @@ export default function Solicitud() {
   const onSubmit = async data => {
     console.log("submit clicked");
     console.log(JSON.stringify(data));
-    const response = await axios.post(
+    await axios.post(
       apiAddress + "/createPedido",
       JSON.stringify(data),
       {
@@ -25,11 +25,17 @@ export default function Solicitud() {
           "Content-Type": "application/json",
         },        
       }
-    );
-    console.log(response);
-    response.status === 200
-      ? alert("Pedido creado")
-      : alert("Error al crear el pedido");
+    ).then(res => {
+      console.log(res);
+      console.log(res.data);
+      res.status === 200
+        ? alert("Pedido creado")
+        : alert("Error al crear el pedido");
+    }).catch(err => {
+      console.log(err);
+      alert("Error al crear el pedido");
+    });
+    
   };
 
   return (
@@ -130,7 +136,7 @@ export default function Solicitud() {
                   ${(errors.talla && "input-warning") || "input-default"}`}
                 placeholder='Talla EUR'
                 name='talla'
-                type='number'
+                type='decimal'
                 {...register("talla", {
                   required: {
                     value: true,
