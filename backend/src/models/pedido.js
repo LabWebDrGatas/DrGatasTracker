@@ -33,6 +33,10 @@ const pedidoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    talla: {
+        type: Number,
+        required: true
+    },
     comentarioCliente: {
         type: String,
         maxLength: 500

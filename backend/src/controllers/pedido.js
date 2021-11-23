@@ -24,7 +24,7 @@ const getPedidos = async (req, res, next) => {
 //crear un pedido en la base de datos
 const createPedido = async (req, res, next) => {
     let pedido = new Pedido(req.body);
-    pedido.numRastreo = makeid(5);
+    pedido = completeSchema(pedido);
     let pedidoExiste;
     try{
         pedidoExiste = await Pedido.findOne({numRastreo: pedido.numRastreo})
@@ -116,6 +116,34 @@ function makeid(length) {
    return result;
 }
 
+const formatDate = (date) => {
+  let d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+};
+
+function completeSchema(pedido) {
+
+    pedido.numRastreo = makeid(5);
+    
+    pedido.estado = 0;
+    
+    pedido.fechaPedido = formatDate(new Date());
+
+    pedido.historialEstados = [{
+        fecha: formatDate(new Date()),
+        estado: 0,
+    }];
+
+    return pedido;
+
+}
 
 module.exports = {
     getPedidos: getPedidos,
