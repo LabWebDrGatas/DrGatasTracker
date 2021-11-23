@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./../component/button";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { apiAddress } from "../connections";
 export default function Solicitud() {
 
   const {
@@ -13,30 +13,24 @@ export default function Solicitud() {
   } = useForm();
 
   console.log(errors)
-  const defaultValues = {
-    materialSuela: "MadRock",
-    servicioExtra: "Ninguno",
-    buzon: "RockCamp",
-  };
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log("submit clicked");
-    console.log(data);
-    // const response = await axios.post(path + '/api/solicitud', values);
-    // const response = await fetch(path + "/posts", {
-    //   method: "PUT",
-    //   body: JSON.stringify(inputs),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // console.log(response);
-    // response && response.status === 201 ? showSuccess() : showError();
+    console.log(JSON.stringify(data));
+    const response = await axios.post(
+      apiAddress + "/createPedido",
+      JSON.stringify(data),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },        
+      }
+    );
+    console.log(response);
+    response.status === 200
+      ? alert("Pedido creado")
+      : alert("Error al crear el pedido");
   };
-
-  // const handleChange = (name, value) => {
-  //   setValues({ ...values, [name]: value });
-  // };
 
   return (
     <>
