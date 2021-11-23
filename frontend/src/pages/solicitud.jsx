@@ -1,8 +1,43 @@
 import React from "react";
-import TextInput from "../component/textInput";
-import Button from './../component/button';
+import Button from "./../component/button";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function Solicitud() {
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors)
+  const defaultValues = {
+    materialSuela: "MadRock",
+    servicioExtra: "Ninguno",
+    buzon: "RockCamp",
+  };
+
+  const onSubmit = data => {
+    console.log("submit clicked");
+    console.log(data);
+    // const response = await axios.post(path + '/api/solicitud', values);
+    // const response = await fetch(path + "/posts", {
+    //   method: "PUT",
+    //   body: JSON.stringify(inputs),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // console.log(response);
+    // response && response.status === 201 ? showSuccess() : showError();
+  };
+
+  // const handleChange = (name, value) => {
+  //   setValues({ ...values, [name]: value });
+  // };
+
   return (
     <>
       <div class='container py-10'>
@@ -11,13 +46,45 @@ export default function Solicitud() {
         </div>
       </div>
       <div class='container py-2'>
-        <form id='form-pedido' role='form' class='space-y-7'>
+        <form
+          id='form-pedido'
+          role='form'
+          class='space-y-7'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div class='space-y-1'>
             <h3>Cliente</h3>
             <div class='flex-col md:flex-row space-x-4'>
-              <TextInput placeholder='Nombre' style='warn' />
-              <TextInput placeholder='Apellido' style='' />
-              <TextInput placeholder='Email' style='' />
+              <input
+                class={(errors.cliente && "input-warning") || "input-default"}
+                placeholder='Nombre'
+                name='cliente'
+                {...register("cliente", {
+                  required: {
+                    value: true,
+                    message: "Favor de introducir un nombre",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Debe tener menos de 50 caracteres",
+                  },
+                })}
+              />
+              <input
+                class={(errors.email && "input-warning") || "input-default"}
+                placeholder='Email'
+                name='email'
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "Favor de introducir un correo electrónico",
+                  },
+                  pattern: {
+                    value: /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/,
+                    message: "Debe ser un correo válido: ejemplo@mail.com",
+                  },
+                })}
+              />
             </div>
           </div>
           <div class='space-y-1'>
@@ -26,6 +93,9 @@ export default function Solicitud() {
               class='px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200'
               name='buzon'
               id='buzon'
+              {...register("buzon", {
+                required: true,
+              })}
             >
               <option value='RockCamp'>RockCamp</option>
               <option value='Sierra Elevation'>Sierra Elevation</option>
@@ -37,16 +107,50 @@ export default function Solicitud() {
           <div class='space-y-1'>
             <h3>Zapatos</h3>
             <div class='grid grid-cols-6 gap-4'>
-              <TextInput
-                clas='col-span-3'
-                style='default'
+              <input
+                class={`col-span-3  
+                  ${(errors.marca && "input-warning") || "input-default"}`}
                 placeholder='Marca'
+                name='marca'
+                {...register("marca", {
+                  required: {
+                    value: true,
+                    message: "Debe especificar la marca de los zapatos",
+                  },
+                })}
               />
-              <TextInput clas='col-span-3' placeholder='Modelo' />
-              <TextInput clas='col-span-1' placeholder='Talla EUR' />
+              <input
+                class={`col-span-3  
+                  ${(errors.modelo && "input-warning") || "input-default"}`}
+                placeholder='Modelo'
+                name='modelo'
+                {...register("modelo", {
+                  required: {
+                    value: true,
+                    message: "Debe especificar el modelo de los zapatos",
+                  },
+                })}
+              />
+              <input
+                class={`col-span-1  
+                  ${(errors.talla && "input-warning") || "input-default"}`}
+                placeholder='Talla EUR'
+                name='talla'
+                type='number'
+                {...register("talla", {
+                  required: {
+                    value: true,
+                    message:
+                      "Debe especificar la talla de los zapatos (en EUR)",
+                  },
+                })}
+              />
               <textarea
                 placeholder='Comentario'
-                class='col-span-5 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200'
+                class={`col-span-5
+                  ${(errors.comentarioCliente && "input-warning") || "input-default"}`}
+                name='comentarioCliente'
+                {...register("comentarioCliente")}
               />
             </div>
           </div>
@@ -58,7 +162,8 @@ export default function Solicitud() {
             <select
               class='px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200'
               id='material_suela'
-              name='material_suela'
+              name='materialSuela'
+              {...register("materialSuela")}
             >
               <option value='madrock'>Mad Rock</option>
               <option value='davos'>Davos</option>
@@ -67,12 +172,22 @@ export default function Solicitud() {
           <div>
             <p class='text-xl'>Servicio Adicional:</p>
             <label>
-              <input type='radio' name='servicioextra' value='cambio_de_liga' />
+              <input
+                type='radio'
+                name='servicioExtra'
+                value='Cambio de liga'
+                {...register("servicioExtra")}
+              />
               Cambio de liga
             </label>
             <br />
             <label>
-              <input type='radio' name='servicioextra' value='parche' />
+              <input
+                type='radio'
+                name='servicioExtra'
+                value='Parche'
+                {...register("servicioExtra")}
+              />
               Parche
             </label>
             <br />
@@ -80,18 +195,16 @@ export default function Solicitud() {
               <input
                 aria-checked='true'
                 type='radio'
-                name='servicioextra'
-                value='ninguno'
+                name='servicioExtra'
+                value='Ninguno'
+                checked
+                {...register("servicioExtra")}
               />
               Ninguno
             </label>
           </div>
           <div class='mb-2 '>
-            <Button
-              id='submit-button'
-              type='submit'
-              text='Agregar'
-            />
+            <Button id='submit-button' type='submit' text='Agregar' />
           </div>
         </form>
       </div>

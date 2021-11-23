@@ -51,7 +51,7 @@ export const LoginForm = ({ handleSubmit }) => {
               Usuario
             </label>
             <TextInput
-              clas=''
+              className=''
               id='username'
               type='text'
               placeholder='Usuario'
@@ -66,7 +66,6 @@ export const LoginForm = ({ handleSubmit }) => {
               Contraseña
             </label>
             <TextInput
-              clas=''
               id='password'
               type='password'
               placeholder='Contraseña'

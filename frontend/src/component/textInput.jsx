@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TextInput(props) {
-  const { id, type, placeholder, clas, style, onChange } = props;
+  const {className, state} = props;
 
   const styles = {
     default:
@@ -14,17 +14,13 @@ export default function TextInput(props) {
       "px-4 py-2 rounded-lg border border-red-500 text-red-600 placeholder-red-600 focus:outline-none focus:ring-2 focus:ring-red-200",
   };
 
-  var styleSelected = styles[style] || styles['default'];
+  const currentState = styles[state] ?? styles['default'];
   
   return (
     <>
       <input
-        id={id}
-        type='type'
-        name='default'
-        placeholder={placeholder}
-        class={clas + ' ' + styleSelected}
-        onChange={onChange}
+        {...props}
+        className={className + ' ' + currentState}
       />
     </>
   );
