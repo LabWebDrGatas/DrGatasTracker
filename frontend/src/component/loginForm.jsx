@@ -25,7 +25,6 @@ export const LoginForm = ({ handleSubmit }) => {
         } else {
           return (res.json());
         }
-        
       })
       .then(
         (result) => {
