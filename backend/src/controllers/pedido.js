@@ -75,7 +75,7 @@ const updatePedido = function(req,res) {
         return res.status(404).send({ error: 'Solo se permite actualizar ' + allowedUpdates});
     }
 
-    Pedido.findOneAndUpdate({numRastreo: numRastreo}, req.body).then(function(pedido){
+    Pedido.findOneAndUpdate({ numRastreo: numRastreo }, req.body).then((pedido) => {
         if(!pedido){
             return res.status(404).send({ error: `Pedido con numero de rastreo ${numRastreo} no existe`});
         }
