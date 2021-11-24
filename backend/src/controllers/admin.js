@@ -104,7 +104,7 @@ const loginAdmin = async (req, res, next) => {
             {expiresIn: '3h'}
         );
     } catch(err) {
-        return next (httpError('Login failed, try again later.', 500));
+        return next(new httpError('Login failed, try again later.', 500));
     }
 
     res.json({

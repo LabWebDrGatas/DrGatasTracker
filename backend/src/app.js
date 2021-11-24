@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const cors = require('cors');
+const morgan = require('morgan');
 
 const router = require('./routes/routes.js');
 const httpError = require('./models/errorModel');
 
-require ('dotenv').config();
+require('dotenv').config();
 
 
 const app = express();
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

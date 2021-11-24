@@ -16,7 +16,7 @@ export default function PedidoScroller({
           {filteredOrders.length === 0 && <p>{defaultText}</p>}
           {filteredOrders &&
             filteredOrders.map((order) => (
-              <PedidoCard order={order} updateOneOrder={updateOneOrder} />
+              <PedidoCard key={order.numPedido} order={order} updateOneOrder={updateOneOrder} />
             ))}
         </div>
       </div>

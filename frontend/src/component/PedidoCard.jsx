@@ -1,6 +1,18 @@
 import React from "react";
 import { estados } from "./../state/estados";
 
+const formatDate = (date) => {
+  let d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [day, month, year].join("-");
+};
+
 export default function PedidoCard({
   order,
   updateOneOrder,
@@ -15,17 +27,21 @@ export default function PedidoCard({
   const zapatos = order.numRastreo + " | " + order.marca + " " + order.modelo;
   const buzon = order.buzon || "Sierra Elevation";
   const estado = estados[order.estado];
-  const ultimoMovimiento = order.historialEstados[0].fecha || "05-03-2021";
+  const ultimoMovimiento = formatDate(order.historialEstados[0].fecha) || "05-03-2021";
   const textoBotonSiguiente = (order.estado==0 && "Aceptar") || "Avanzar";
   const textoBotonRegresar = (order.estado==0 && "Rechazar") || "Retroceder";
 
   
   function handleBackButton() {
-    order.estado -= 1;
-    updateOneOrder(order);
+    if (window.confirm("¿Estás seguro de que quieres retroceder el estado del pedido?")) {
+      order.estado -= 1;
+      order.historialEstados = [{fecha: new Date(), estado: order.estado}, ...order.historialEstados];
+      updateOneOrder(order);
+    }
   }
   function handleNextButton() {
     order.estado += 1;
+    order.historialEstados = [{fecha: new Date(), estado: order.estado}, ...order.historialEstados];
     updateOneOrder(order);
   }
   return (
