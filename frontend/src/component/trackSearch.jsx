@@ -11,6 +11,7 @@ const TrackSearch = () => {
     const [lastname, setLastName] = useState();
     const [trackingNumber, setTrackingNumber] = useState();
     const [modalVisible, setModalVisible] = useState(false);
+    const [pedido, setPedido] = useState();
 
     const handleLastName = (e) => {
         setLastName(e.target.value);
@@ -20,24 +21,36 @@ const TrackSearch = () => {
         setTrackingNumber(e.target.value);
     }
 
-    const handleSearch = () => {
-        let pedido = mockData[0];
+    const handleSearch = async () => {
         // Search order
         //let pedido = context.dispatch({type: "FIND_PEDIDO", payload: {id: "yes", lastname: "yes"}})
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+          }; 
+          try {
+            const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + trackingNumber, requestOptions);
+            let res = await responseData.json();
+            setPedido(res);
+            console.log(pedido)
+          } catch (error) {
+              console.log(error)
+          }
+       
 
-        
+        /*
         if (lastname === pedido.cliente && trackingNumber === pedido.numRastreo) {
             history.push('/Track/' + pedido.numRastreo);
         } else {
             handleToggleModal();
-        }
+        }*/
     }
 
     const handleToggleModal = () => {
         setModalVisible(modalVisible ? false : true)
     }
 
-    console.log(lastname, trackingNumber)
+    
 
     return(
         <div>
