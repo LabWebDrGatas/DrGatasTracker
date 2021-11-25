@@ -14,11 +14,12 @@ const TrackSearch = () => {
     const [pedido, setPedido] = useState();
 
     const handleLastName = (e) => {
+
         setLastName(e.target.value);
     }
 
     const handleTrackingNumber = (e) => {
-        setTrackingNumber(e.target.value);
+        setTrackingNumber(e.target.value.toUpperCase());
     }
 
     const handleSearch = async () => {
