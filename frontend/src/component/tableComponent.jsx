@@ -15,7 +15,7 @@ const List = ({items}) => {
 
   let searchingFor = (term) => {
     return (x) => {
-      return x.numRastreo.toLowerCase().includes(term.toLowerCase()) || !term || x.numRastreo.toLowerCase().includes(term.toLowerCase()) ;
+      return x.numRastreo.toLowerCase().includes(term.toLowerCase()) || !term || x.cliente.toLowerCase().includes(term.toLowerCase()) ;
     };
   }
 

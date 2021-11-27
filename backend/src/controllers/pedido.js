@@ -67,10 +67,11 @@ const getPedidoRastreo = async (req, res, next) => {
 const updatePedido = function(req,res) {
     const numRastreo = req.params.pedido;
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['estado', 'historialEstados'];
+    // const allowedUpdates = ['estado', 'historialEstados'];
+    // const isValidUpdate = updates.every((update) => allowedUpdates.includes(update));
 
-    const isValidUpdate = updates.every((update) => allowedUpdates.includes(update));
-
+    const isValidUpdate = true;
+    //console.log(req.body, 'Update Message', numRastreo)
     if(!isValidUpdate){
         return res.status(404).send({ error: 'Solo se permite actualizar ' + allowedUpdates});
     }

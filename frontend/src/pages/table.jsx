@@ -1,5 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import axios from 'axios';
+import { apiAddress } from "../connections";
 
 import mockData from './../state/mockData';
 
@@ -13,9 +15,24 @@ const Table = () => {
   const history = useHistory();
   const [items, setItems] = useState(mockData);
 
+  let url = `${apiAddress}/allpedidos`;
+
+  const getItems = async () => {
+    let items = await axios.get(url)
+    console.log(items.data, 'getItemsdata')
+    return items
+  };
+
+  useEffect(async () => {
+    let { data } = await getItems();
+    setItems(data)
+  }, [])
+
   const changeToAdminPage = (e) => {
     history.push('/Admin/');
   }
+
+
 
   return (
     <>
