@@ -4,6 +4,7 @@ import mockData from'../state/mockData';
 import '../css/track.css';
 import Modal from './modal';
 import Button from './button';
+import { apiAddress } from '../connections';
 
 
 const TrackSearch = () => {
@@ -12,11 +13,6 @@ const TrackSearch = () => {
     const [trackingNumber, setTrackingNumber] = useState();
     const [modalVisible, setModalVisible] = useState(false);
     const [pedido, setPedido] = useState();
-
-    const handleLastName = (e) => {
-
-        setLastName(e.target.value);
-    }
 
     const handleTrackingNumber = (e) => {
         setTrackingNumber(e.target.value.toUpperCase());
@@ -30,7 +26,7 @@ const TrackSearch = () => {
             headers: { 'Content-Type': 'application/json' }
           }; 
           try {
-            const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + trackingNumber, requestOptions);
+            const responseData = await fetch(apiAddress + '/getPedidoRastreo/' + trackingNumber, requestOptions);
             let res = await responseData.json();
             if (responseData.status === 200){
                 setPedido(res);
@@ -48,8 +44,6 @@ const TrackSearch = () => {
     const handleToggleModal = () => {
         setModalVisible(modalVisible ? false : true)
     }
-
-    
 
     return(
         <div>

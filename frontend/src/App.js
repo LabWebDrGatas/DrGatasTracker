@@ -13,7 +13,6 @@ import Login from './pages/login'
 import Solicitud from './pages/solicitud';
 import pedidosMock from './state/mockData';
 import UpdatePedido from './pages/update_pedido'
-import Table from './pages/table';
 
 import {main, mainStateReducer} from './state/mainState'
 
@@ -33,7 +32,6 @@ function App() {
         <Switch>
           <Route path='/Home' component={Homepage} />
           { localStorage.getItem('token') ? <Route path='/Admin' component={Admin} /> : null }
-          { localStorage.getItem('token') ?  <Route path='/Table/' component={Table} /> : null }
           { localStorage.getItem('token') ? <Route path='/Update/:_id' component={UpdatePedido} /> : null }
           <Route path='/Request' component={Solicitud} />
           <Route path='/Track/:_id' component={Track_Item} />
