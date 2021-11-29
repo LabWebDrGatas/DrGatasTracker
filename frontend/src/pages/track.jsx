@@ -9,12 +9,12 @@ const Track = props => {
     console.log(context.state)
 
     return ( 
-        <div className="track container" style={{display: "flex", width: "100%", alignItems: "center", padding: 20}}>
+        <div className="container track" style={{display: "flex", width: "100%", alignItems: "center", padding: 20}}>
         <div className="left">
             <TrackSearch/>
         </div>
         <div className="right">
-            Ingresa tu apellido y número de seguimiento para realizar el seguimiento
+            Ingresa tu número de seguimiento para realizar el seguimiento
         </div>
         </div>
     );

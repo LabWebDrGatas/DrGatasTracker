@@ -4,6 +4,8 @@ import Stepper from '../component/stepper';
 import mockData from '../state/mockData';
 import { useParams } from 'react-router-dom';
 import '../css/track.css';
+import { apiAddress } from '../connections';
+import { estados } from '../state/estados';
 
 const Track_Item = props => {
     const [ pedido, setPedido ] = useState({});
@@ -17,7 +19,7 @@ const Track_Item = props => {
             headers: { 'Content-Type': 'application/json' }
           };
 
-        const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + _id, requestOptions);
+        const responseData = await fetch(apiAddress + '/getPedidoRastreo/' + _id, requestOptions);
             let res = await responseData.json();
             if (responseData.status === 200){
                 setPedido(res)
@@ -28,14 +30,15 @@ const Track_Item = props => {
         searchOrder();
     }, [])
     return (
-        <div className="track container" style={{ display: "flex", width: "100%", alignItems: "center", padding: 20 }}>
+        <div className="container track" style={{ display: "flex", width: "100%", alignItems: "center", padding: 20 }}>
             <div className="left">
                 <TrackSearch />
             </div>
             <div className="right">
                 <Stepper status={pedido.estado}/>
+                <h3 class="mx-auto text-green-900">{estados[pedido.estado]}</h3>
                 <div className="row-table">
-                    <span># de envio</span>
+                    <span># de seguimiento</span>
                     <span style={{float: 'right'}}>{pedido.numRastreo}</span>
                 </div>
                 <hr/>
