@@ -32,19 +32,17 @@ const TrackSearch = () => {
           try {
             const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + trackingNumber, requestOptions);
             let res = await responseData.json();
-            setPedido(res);
+            if (responseData.status === 200){
+                setPedido(res);
+                history.push('/Track/' + res.numRastreo);
+            } else {
+                handleToggleModal();
+            }
+            
             console.log(pedido)
           } catch (error) {
-              console.log(error)
+              console.log(error)        
           }
-       
-
-        /*
-        if (lastname === pedido.cliente && trackingNumber === pedido.numRastreo) {
-            history.push('/Track/' + pedido.numRastreo);
-        } else {
-            handleToggleModal();
-        }*/
     }
 
     const handleToggleModal = () => {
@@ -59,7 +57,6 @@ const TrackSearch = () => {
                 <h1>Seguimiento de<br /> reparaciones</h1>
             </div>
             <div className="form">
-                <input placeholder="Apellido" type="text" name="lastname" onChange={handleLastName}/>
                 <input placeholder="# de seguimiento" type="text" name="lastname" onChange={handleTrackingNumber}/>
                 <Button
                     onClick={handleSearch}

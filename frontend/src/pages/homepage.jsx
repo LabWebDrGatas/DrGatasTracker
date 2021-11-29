@@ -22,19 +22,26 @@ const Homepage = props => {
         setTrackingNumber(e.target.value);
     }
 
-    let submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
-        console.log(lastname, trackingNumber)
-        let pedido = mockData[0];
         // Search order
         //let pedido = context.dispatch({type: "FIND_PEDIDO", payload: {id: "yes", lastname: "yes"}})
-
-        
-        if (lastname === pedido.cliente && trackingNumber === pedido.numRastreo) {
-            history.push('/Track/' + pedido.numRastreo);
-        } else {
-            handleToggleModal();
-        }
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+          }; 
+          try {
+            const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + trackingNumber, requestOptions);
+            let res = await responseData.json();
+            if (responseData.status === 200){
+                history.push('/Track/' + res.numRastreo);
+            } else {
+                handleToggleModal();
+            }
+          } catch (error) {
+              console.log(error)
+              
+          }
     }   
 
     const handleToggleModal = () => {
@@ -50,8 +57,7 @@ const Homepage = props => {
                         <h1>Seguimiento de Reparaciones</h1>
                         <p>Introduce aqui tu nombre y numero de pedido para consultar el estado actual de tus Gatas</p>
                         <form id='myform' onSubmit={submitForm}>
-                            <input className='form_fields' type='text' placeholder='Nombre' onChange={handleLastName}/>
-                            <input className='form_fields' type='text' placeholder='Numero' onChange={handleTrackingNumber}/>
+                            <input className='form_fields' type='text' placeholder='Numero de restreo' onChange={handleTrackingNumber}/>
                             <Button
                                 type='submit'
                                 text='Buscar'
