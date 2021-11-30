@@ -10,17 +10,20 @@ import { apiAddress } from "../connections";
 
 const UpdatePedido = () => {
   const {_id} = useParams()
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    cliente: '',
+    email:''
+  });
 
   useEffect(async (e) => {
-    let url_get = `${apiAddress}/getPedidoRastreo/${_id}`;
-    const getItems = async data => {
-      let items = await axios.get(url_get)
-      console.log(items.data, 'getItemsdata Supp')
-      return items
-    };
-    let { data } = await getItems();
-    setValues(data)
+    // let url_get = `${apiAddress}/getPedidoRastreo/${_id}`;
+    // const getItems = async data => {
+    //   let items = await axios.get(url_get)
+    //   console.log(items.data, 'getItemsdata Supp')
+    //   return items
+    // };
+    // let { data } = await getItems();
+    // setValues(data)
   }, [])
 
   let handleChange = (e) => {
