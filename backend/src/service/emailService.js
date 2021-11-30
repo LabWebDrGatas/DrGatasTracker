@@ -1,11 +1,14 @@
 const nodemailer = require('nodemailer');
 const nodemailMailgun = require('nodemailer-mailgun-transport');
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 //Autthorization values
 const auth = {
     auth:{
-        api_key: '435fffe935e75233aeac94037140f353-10eedde5-57c25941',
-        domain: 'sandbox553e11f02cda46ea93183ce34aa0a800.mailgun.org'
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
     }
 }
 
@@ -16,7 +19,7 @@ module.exports = {
     sendEmail: async(message, subject, to) => {
         let emailOptions = {
             from: 'Dr Gatas <robot@drgatas.com>',
-            to: 'l.alberto@brounie.com.mx', //HERE WOULD BE THE USER EMAIL AFTER THE CREDENTIALS ARE GENERATED DO NOT CHANGE
+            to: 'A01273884@itesm.mx', //HERE WOULD BE THE USER EMAIL AFTER THE CREDENTIALS ARE GENERATED DO NOT CHANGE
             subject: subject,
             html: `
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -242,7 +245,7 @@ module.exports = {
                     
             <div align="center">
               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:'Montserrat',sans-serif;"><tr><td style="font-family:'Montserrat',sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:48px; v-text-anchor:middle; width:226px;" arcsize="125%" stroke="f" fillcolor="#0088ee"><w:anchorlock/><center style="color:#FFFFFF;font-family:'Montserrat',sans-serif;"><![endif]-->
-                <a href="" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:'Montserrat',sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #0088ee; border-radius: 60px;-webkit-border-radius: 60px; -moz-border-radius: 60px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #CCC; border-top-style: solid; border-top-width: 0px; border-left-color: #CCC; border-left-style: solid; border-left-width: 0px; border-right-color: #CCC; border-right-style: solid; border-right-width: 0px; border-bottom-color: #0275a4; border-bottom-style: solid; border-bottom-width: 5px;">
+                <a href="https://www.facebook.com/DrGatas/" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:'Montserrat',sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #0088ee; border-radius: 60px;-webkit-border-radius: 60px; -moz-border-radius: 60px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #CCC; border-top-style: solid; border-top-width: 0px; border-left-color: #CCC; border-left-style: solid; border-left-width: 0px; border-right-color: #CCC; border-right-style: solid; border-right-width: 0px; border-bottom-color: #0275a4; border-bottom-style: solid; border-bottom-width: 5px;">
                   <span style="display:block;padding:15px 40px 14px;line-height:120%;"><strong><span style="font-size: 16px; line-height: 19.2px;">Sigue explorando</span></strong></span>
                 </a>
               <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->

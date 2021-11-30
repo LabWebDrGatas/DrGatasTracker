@@ -105,4 +105,7 @@ dist
 .tern-port
 
 #.config file
-backend/src/config.js
+config.js
+
+#env backend
+nodemon.json

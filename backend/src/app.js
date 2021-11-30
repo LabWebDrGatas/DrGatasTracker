@@ -46,12 +46,12 @@ app.use((error, req, res, next) => {
     });
 })
 
-
+let connectionURL;
 if(process.env.NODE_ENV === 'production'){
-    var connectionURL = process.env.connectionURL
+    connectionURL = process.env.connectionURL
 }
 else{
-var connectionURL = require('./config.js').connectionURL
+    connectionURL = require('./config.js').connectionURL
 }
 
 //verify db connection first 
