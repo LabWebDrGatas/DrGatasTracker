@@ -1,14 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const { check } = require('express-validator'); 
 
 const pedidos = require('../controllers/pedido');
 const admin = require('../controllers/admin');
 const checkAuth = require('../middleware/check-auth');
+const fileUpload = require('../middleware/file-upload');
 
 /*************** NO AUTH REQUIRED  *****************/
 //pedidos
 router.get('/getPedidoRastreo/:pedido', pedidos.getPedidoRastreo);
-router.post('/createPedido', pedidos.createPedido);
+router.post('/createPedido',
+    fileUpload.single('image'),
+    [ //completar aquí todas las verificaciones
+        check('email', 'Un correo en formato es requerido.').normalizeEmail().isEmail()
+    ],
+    pedidos.createPedido);
 
 //admin
 router.post('/loginAdmin', admin.loginAdmin);

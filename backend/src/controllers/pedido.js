@@ -24,6 +24,9 @@ const getPedidos = async (req, res, next) => {
 //crear un pedido en la base de datos
 const createPedido = async (req, res, next) => {
     let pedido = new Pedido(req.body);
+    
+    pedido.image = req.file.path;
+
     pedido = completeSchema(pedido);
     let pedidoExiste;
     try{

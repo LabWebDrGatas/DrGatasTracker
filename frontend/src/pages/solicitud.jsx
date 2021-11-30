@@ -3,6 +3,10 @@ import Button from "./../component/button";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { apiAddress } from "../connections";
+import ImageUpload from "../component/ImageUpload";
+import { useFormHook } from "../hooks/form-hook";
+import { useHttpClient } from "../hooks/http-hook";
+
 export default function Solicitud() {
 
   const {
@@ -12,11 +16,49 @@ export default function Solicitud() {
     formState: { errors },
   } = useForm();
 
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();  const [formState, inputHandler] = useFormHook(
+    {
+      image: {
+        value: null,
+        isValid: true
+      }
+    },
+    true
+  );
+
   console.log(errors)
 
   const onSubmit = async data => {
     console.log("submit clicked");
     console.log(JSON.stringify(data));
+    try {
+      const formData = new FormData();
+      formData.append('email', data.email);
+      formData.append('cliente', data.cliente);
+      formData.append('buzon', data.buzon);
+      formData.append('marca', data.marca);
+      formData.append('modelo', data.modelo);
+      formData.append('talla', data.talla);
+      formData.append('comentarioCliente', data.comentarioCliente);
+      formData.append('materialSuela', data.materialSuela);
+      formData.append('servicioExtra', data.servicioExtra);
+      formData.append('image', formState.inputs.image.value);
+
+      for (let value of formData.values()) {
+        console.log(value);
+      }
+
+      let res = await sendRequest(
+        apiAddress + '/createPedido',
+        'POST',
+        formData
+      )
+        alert("Pedido creado");
+    } catch (error) {
+      console.log(error);
+      alert("Error al crear el pedido");
+    }
+    /*
     await axios.post(
       apiAddress + "/createPedido",
       JSON.stringify(data),
@@ -35,7 +77,7 @@ export default function Solicitud() {
       console.log(err);
       alert("Error al crear el pedido");
     });
-    
+    */
   };
 
   return (
@@ -202,6 +244,11 @@ export default function Solicitud() {
               />
               Ninguno
             </label>
+            <ImageUpload
+                  id="image"
+                  center
+                  onInput={inputHandler}
+                />{" "}
           </div>
           <div class='mb-2 '>
             <Button id='submit-button' type='submit' text='Agregar' />

@@ -68,6 +68,9 @@ const pedidoSchema = new mongoose.Schema({
     servicioExtra: {
         type: String,
         required: true
+    },
+    image: {
+        type: String
     }
 });
 

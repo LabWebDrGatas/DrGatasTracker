@@ -58,7 +58,8 @@ var connectionURL = require('./config.js').connectionURL
 console.log("Waiting for db connection!");
 mongoose.connect(connectionURL).then(() => {
     app.listen(port, function(){
-        console.log("Listening in port " + port); //only listen once db is ready
+        console.log('Db connected!');
+        console.log("Listening in port " + port);
     });
 }).catch(err => {
     console.log({error: err,
