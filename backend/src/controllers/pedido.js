@@ -83,10 +83,27 @@ const updatePedido = function(req,res) {
         if(!pedido){
             return res.status(404).send({ error: `Pedido con numero de rastreo ${numRastreo} no existe`});
         }
+        const estados = {
+            "-1": "Rechazado",
+            0: "Solicitando",
+            1: "Aceptado",
+            2: "Recibido",
+            3: "En taller",
+            4: "En reparación",
+            5: "Reparado",
+            6: "En buzón",
+            7: "Entregado",
+          };
+        let message = {
+            numRastreo: pedido.numRastreo,
+            estado: estados[pedido.estado]
+        }
+        EmailService.sendEmailUpdate(message, 'El estado de tu pedido fue modificado, confirma en la página', pedido.email);
         return res.send({actualizado: "Correcto", pedido});
     }).catch(function(error){
         res.status(500).send({Error: error});
     });
+    
 }
 
 const deletePedido = async (req, res, next) => {
