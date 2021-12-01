@@ -1,3 +1,3 @@
-const apiAddress = 'http://localhost:3001';
+const apiAddress = "https://dr-gatas-api.herokuapp.com/";
 
 module.exports = { apiAddress };

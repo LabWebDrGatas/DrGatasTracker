@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
 const router = require('./routes/routes.js');
 const httpError = require('./models/errorModel');
@@ -15,6 +16,8 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(morgan());
+
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

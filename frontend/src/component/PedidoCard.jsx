@@ -1,5 +1,6 @@
 import React from "react";
 import { estados } from "./../state/estados";
+import { apiAddress } from "../connections";
 
 const formatDate = (date) => {
   let d = new Date(date),
@@ -18,9 +19,9 @@ export default function PedidoCard({
   updateOneOrder,
 }) {
 
-  const foto =
-    order.img ||
-    "https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80";
+  const foto = order.image
+    ? apiAddress + '/' + order.image
+    : "https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80";
   const servicio = order.servicioExtra
     ? "Resolado + " + order.servicioExtra
     : "Resolado";
