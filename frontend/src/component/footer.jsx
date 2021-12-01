@@ -5,7 +5,7 @@ export default function Footer() {
     <React.Fragment>
       <div class='footer bg-gray-700 my-10'>
         <div class='container mx-auto py-10 text-gray-200'>
-          <div class='flex flex-col justify-evenly first:items-center md:flex-row md:space-x-20 gap-y-5'>
+          <div class='flex flex-col justify-evenly md:items-center md:flex-row md:space-x-20 gap-y-5'>
             <div class='flex-initial w-1/6'>
               <a id='footer-logo' href='/Home' class='logo_footer'>
                 <img
