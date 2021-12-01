@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useMemo } from "react";
 import { useParams, useHistory } from "react-router";
 
 import TextInput from "../component/textInput";
@@ -25,22 +25,26 @@ const UpdatePedido = () => {
     servicioExtra: '',
   });
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: useMemo(() => values, [values]),
+  });
+
   useEffect(async (e) => {
     let url_get = `${apiAddress}/getPedidoRastreo/${_id}`;
-    const getItems = async data => {
-      let items = await axios.get(url_get)
-      // console.log(items.data, 'getItemsdata')
-      return items
-    };
-    let { data } = await getItems();
-    setValues(data)
-  }, [])
+    let { data } = await axios.get(url_get);
+    setValues(data);
+    reset(data);
+  }, [reset])
 
-  let url_update = `${apiAddress}/updatePedido/${_id}`;
-
+  
   const onSubmit = async data => {
-    console.log(data, url_update, `Bearer ${localStorage.getItem('token')}`)
-    console.log(JSON.stringify(data));
+    let url_update = `${apiAddress}/updatePedido/${_id}`;
     await axios.put(
       url_update,
       JSON.stringify(data),
@@ -51,24 +55,16 @@ const UpdatePedido = () => {
         },        
       }
     ).then(res => {
-      console.log(res);
-      console.log(res.data);
       res.status === 200
         ? alert('Se actualizo el pedido')
         : alert('Error al actualizar el pedido');
     }).catch(err => {
-      console.log(err);
-      alert("Error al actualizar el pedido");
+      alert("Error al actualizar el pedido: " + err);
     });
     history.push('/Admin');
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  
 
   let handleChange = (e) => {
     const {name, value} = e.target
@@ -101,7 +97,6 @@ const UpdatePedido = () => {
                 class={(errors.cliente && "input-warning") || "input-default"}
                 placeholder='Nombre'
                 name='cliente'
-                defaultValue={values.cliente}
                 {...register("cliente", {
                   required: {
                     value: true,
@@ -117,7 +112,6 @@ const UpdatePedido = () => {
                 class={(errors.email && "input-warning") || "input-default"}
                 placeholder='Email'
                 name='email'
-                defaultValue={values.email}
                 {...register("email", {
                   required: {
                     value: true,
@@ -137,16 +131,15 @@ const UpdatePedido = () => {
               class='px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200'
               name='buzon'
               id='buzon'
-              // defaultValue={values.buzon}
               {...register("buzon", {
                 required: true,
               })}
             >
-              <option selected={'RockCamp' == values.buzon ? true : false} value='RockCamp'>RockCamp</option>
-              <option selected={'Sierra Elevation' == values.buzon ? true : false} value='Sierra Elevation'>Sierra Elevation</option>
-              <option selected={'Pico Norte' == values.buzon ? true : false} value='Pico Norte'>Pico Norte</option>
-              <option selected={'Delta' == values.buzon ? true : false} value='Delta'>Delta</option>
-              <option selected={'Mad Complex' == values.buzon ? true : false} value='Mad Complex'>Mad Complex</option>
+              <option value='RockCamp'>RockCamp</option>
+              <option value='Sierra Elevation'>Sierra Elevation</option>
+              <option value='Pico Norte'>Pico Norte</option>
+              <option value='Delta'>Delta</option>
+              <option value='Mad Complex'>Mad Complex</option>
             </select>
           </div>
           <div class='space-y-1'>
@@ -157,10 +150,6 @@ const UpdatePedido = () => {
                   ${(errors.marca && "input-warning") || "input-default"}`}
                 placeholder='Marca'
                 name='marca'
-                defaultValue={values.marca}
-                // value={values.marca}
-                // onChange={e => handleChange(e.target.value)}
-                // onChange={e => setValues({ marca: e.target.value })}
                 {...register("marca", {
                   required: {
                     value: true,
@@ -173,7 +162,6 @@ const UpdatePedido = () => {
                   ${(errors.modelo && "input-warning") || "input-default"}`}
                 placeholder='Modelo'
                 name='modelo'
-                defaultValue={values.modelo}
                 {...register("modelo", {
                   required: {
                     value: true,
@@ -186,7 +174,6 @@ const UpdatePedido = () => {
                   ${(errors.talla && "input-warning") || "input-default"}`}
                 placeholder='Talla EUR'
                 name='talla'
-                defaultValue={values.talla}
                 type='decimal'
                 {...register("talla", {
                   required: {
@@ -216,8 +203,10 @@ const UpdatePedido = () => {
               name='materialSuela'
               {...register("materialSuela")}
             >
-              <option selected={'madrock' == values.materialSuela ? true : false} value='madrock'>Mad Rock</option>
-              <option selected={'davos' == values.materialSuela ? true : false} value='davos'>Davos</option>
+              <option
+                value='madrock'>Mad Rock</option>
+              <option
+                value='davos'>Davos</option>
             </select>
           </div>
           <div>
@@ -226,10 +215,7 @@ const UpdatePedido = () => {
               <input
                 type='radio'
                 name='servicioExtra'
-                defaultValue={values.servicioExtra}
                 value='Cambio de liga'
-                checked={'Cambio de liga' == values.servicioExtra ? true : false}
-                onClick={handleChange}
                 {...register("servicioExtra")}
               />
               Cambio de liga
@@ -240,8 +226,6 @@ const UpdatePedido = () => {
                 type='radio'
                 name='servicioExtra'
                 value='Parche'
-                checked={'Parche' == values.servicioExtra ? true : false}
-                onClick={handleChange}
                 {...register("servicioExtra")}
               />
               Parche
@@ -253,8 +237,6 @@ const UpdatePedido = () => {
                 type='radio'
                 name='servicioExtra'
                 value='Ninguno'
-                checked={'Ninguno' == values.servicioExtra ? true : false}
-                onClick={handleChange}
                 {...register("servicioExtra")}
               />
               Ninguno

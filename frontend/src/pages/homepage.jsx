@@ -56,9 +56,9 @@ const Homepage = props => {
                 <div class="container">
                     <div class="info">
                         <h1>Seguimiento de Reparaciones</h1>
-                        <p>Introduce aqui tu nombre y numero de pedido para consultar el estado actual de tus Gatas</p>
+                        <p>Introduce aquí tu nombre y numero de pedido para consultar el estado actual de tus gatas</p>
                         <form id='myform' onSubmit={submitForm}>
-                            <input className='form_fields' type='text' placeholder='Numero de restreo' onChange={handleTrackingNumber}/>
+                            <input className='form_fields' type='text' placeholder='Numero de rastreo' onChange={handleTrackingNumber}/>
                             <Button
                                 type='submit'
                                 text='Buscar'

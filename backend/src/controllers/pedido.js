@@ -96,7 +96,7 @@ const updatePedido = function(req,res) {
           };
         let message = {
             numRastreo: pedido.numRastreo,
-            estado: estados[pedido.estado]
+            estado: estados[req.body.estado]
         }
         EmailService.sendEmailUpdate(message, 'El estado de tu pedido fue modificado, confirma en la página', pedido.email);
         return res.send({actualizado: "Correcto", pedido});
