@@ -126,7 +126,7 @@ h1 {
     }
 }
 
-@media (max-width:740px) {
+@media (max-width:1200px) {
 
     .track {
         display: block;
