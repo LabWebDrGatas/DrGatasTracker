@@ -6,6 +6,8 @@ import List from "../component/tableComponent";
 import { estados } from './../state/estados';
 import axios from 'axios';
 import { apiAddress } from './../connections';
+import ModalReady from "../component/modalReady";
+import { useForm } from "react-hook-form";
 
 const Admin = () => {
   // const pedidos = await 
@@ -14,10 +16,15 @@ const Admin = () => {
   const switchView = (e) => {
     setTableView(!tableView);
   }
+
+  const handleToggleModal = () => {
+    setModalVisible(modalVisible ? false : true)
+} 
   
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tableView, setTableView] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(async () => {
     try {
@@ -38,6 +45,9 @@ const Admin = () => {
   const updateOneOrder = async (order) => {
     try {
       // Update the order on the server
+      if(order.estado == 6) {
+        handleToggleModal();
+      }
       const res = await axios.put(
         apiAddress + "/updatepedido/" + order.numRastreo,
         {
@@ -50,7 +60,7 @@ const Admin = () => {
           },
         }
       );
-      console.log(res);
+     
 
       // Update the orders locally
       const idx = orders.findIndex((p) => p.numRastreo === order.numRastreo);
@@ -105,6 +115,14 @@ const Admin = () => {
           ? <h1>Cargando...</h1>
           : renderVista()
         }
+
+        <div>
+          <ModalReady
+            isVisible={modalVisible}
+            title={null}
+            onClose={handleToggleModal}
+          />
+        </div>
 
       </div>
     </>

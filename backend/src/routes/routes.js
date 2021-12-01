@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const pedidos = require('../controllers/pedido');
 const admin = require('../controllers/admin');
 const checkAuth = require('../middleware/check-auth');
+const comment = require('../controllers/comment');
 const fileUpload = require('../middleware/file-upload');
 
 /*************** NO AUTH REQUIRED  *****************/
@@ -19,6 +20,11 @@ router.post('/createPedido',
 
 //admin
 router.post('/loginAdmin', admin.loginAdmin);
+
+//comment
+router.post('/createComment', 
+    fileUpload.single('image'),
+    comment.createComment);
 
 /*************** AUTH REQUIRED  *****************/
 

@@ -16,7 +16,8 @@ export default function Solicitud() {
     formState: { errors },
   } = useForm();
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();  const [formState, inputHandler] = useFormHook(
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();  
+  const [formState, inputHandler] = useFormHook(
     {
       image: {
         value: null,
