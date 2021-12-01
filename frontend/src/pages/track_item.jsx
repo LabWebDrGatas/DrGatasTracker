@@ -30,7 +30,7 @@ const Track_Item = props => {
         searchOrder();
     }, [])
     return (
-        <div className="container track" style={{ display: "flex", width: "100%", alignItems: "center", padding: 20 }}>
+        <div className="container track" style={{width: "100%", alignItems: "center", padding: 20 }}>
             <div className="left">
                 <TrackSearch />
             </div>

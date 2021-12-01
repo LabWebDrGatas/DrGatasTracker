@@ -9,7 +9,7 @@ const Track = props => {
     console.log(context.state)
 
     return ( 
-        <div className="container track" style={{display: "flex", width: "100%", alignItems: "center", padding: 20}}>
+        <div className="container track" style={{width: "100%", alignItems: "center", padding: 20}}>
         <div className="left">
             <TrackSearch/>
         </div>
