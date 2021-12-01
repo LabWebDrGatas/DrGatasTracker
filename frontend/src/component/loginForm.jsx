@@ -4,6 +4,7 @@ import Button from "./button";
 import Modal from './modal';
 import TextInput from "./textInput";
 import { useHistory } from "react-router";
+import { apiAddress } from '../connections';
 
 export const LoginForm = ({ handleSubmit }) => {
   let context = useContext(main);
@@ -18,7 +19,7 @@ export const LoginForm = ({ handleSubmit }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password: password })
     };
-    fetch("http://localhost:3001/loginAdmin", requestOptions)
+    fetch(apiAddress + "/loginAdmin", requestOptions)
       .then(res => {
         if (res.status !== 200) {
           throw new Error();

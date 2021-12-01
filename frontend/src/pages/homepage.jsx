@@ -7,6 +7,7 @@ import Modal from '../component/modal';
 import '../css/homepage.css'
 import '../css/form.css'
 import Button from './../component/button';
+import { apiAddress } from '../connections';
 
 const Homepage = props => {
     const history = useHistory();
@@ -31,7 +32,7 @@ const Homepage = props => {
             headers: { 'Content-Type': 'application/json' }
           }; 
           try {
-            const responseData = await fetch('http://localhost:3001/getPedidoRastreo/' + trackingNumber, requestOptions);
+            const responseData = await fetch(apiAddress + '3001/getPedidoRastreo/' + trackingNumber, requestOptions);
             let res = await responseData.json();
             if (responseData.status === 200){
                 history.push('/Track/' + res.numRastreo);
