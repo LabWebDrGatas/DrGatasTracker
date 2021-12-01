@@ -92,3 +92,23 @@
   clear: both;
 }
 
+@media (max-width:1200px) {
+    .container {
+        width: 100%;
+    }
+    .landing-page .image {
+        width: 100%;
+        float: none;
+        margin-top: 35px;
+    }
+    .landing-page .image img{
+        width: 100%;
+    }
+
+    .landing-page .info {
+        width: 100%;
+        float: none;
+        margin-top: 80px;
+    }
+}
+
