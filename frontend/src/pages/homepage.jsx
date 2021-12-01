@@ -32,7 +32,7 @@ const Homepage = props => {
             headers: { 'Content-Type': 'application/json' }
           }; 
           try {
-            const responseData = await fetch(apiAddress + '3001/getPedidoRastreo/' + trackingNumber, requestOptions);
+            const responseData = await fetch(apiAddress + '/getPedidoRastreo/' + trackingNumber, requestOptions);
             let res = await responseData.json();
             if (responseData.status === 200){
                 history.push('/Track/' + res.numRastreo);

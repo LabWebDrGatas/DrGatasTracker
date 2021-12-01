@@ -1,3 +1,3 @@
-const apiAddress = "https://dr-gatas-api.herokuapp.com";
+const apiAddress = "https://drgatas-back.herokuapp.com";
 
 module.exports = { apiAddress };
