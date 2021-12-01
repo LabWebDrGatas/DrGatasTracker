@@ -49,13 +49,7 @@ app.use((error, req, res, next) => {
     });
 })
 
-let connectionURL;
-if(process.env.NODE_ENV === 'production'){
-    connectionURL = process.env.connectionURL
-}
-else{
-    connectionURL = require('./config.js').connectionURL
-}
+let connectionURL = process.env.connectionURL || require('./config.js').connectionURL
 
 //verify db connection first 
 console.log("Waiting for db connection!");
