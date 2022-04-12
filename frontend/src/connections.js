@@ -1,3 +1,2 @@
-const apiAddress = "https://drgatas-back.herokuapp.com";
-const apiAdressLocal = "http://localhost:3001";
+const apiAddress = process.env.API_ADDRESS || "http://localhost:3001";
 module.exports = { apiAddress };
